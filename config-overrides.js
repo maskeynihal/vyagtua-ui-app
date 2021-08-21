@@ -1,15 +1,22 @@
-const { override, addWebpackModuleRule } = require("customize-cra");
+const {
+  override,
+  addWebpackModuleRule,
+  addWebpackAlias,
+  addWebpackResolve,
+} = require("customize-cra");
+
+const path = require("path");
 // const webpack = require("webpack");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-module.exports = override(
-  addWebpackModuleRule({
-    rules: [
-      {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
-      },
-    ],
-  })
-);
+module.exports = {
+  webpack: override(
+    addWebpackAlias({
+      react: path.resolve(__dirname, "./node_modules/react"),
+    }),
+    addWebpackResolve({
+      symlinks: false,
+    })
+  ),
+};
