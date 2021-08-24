@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Header } from "vyaguta-ui-lib";
+import { Header, Global } from "vyaguta-ui-lib";
 
 const headerNavs = [
   {
@@ -50,7 +50,9 @@ const user = {
 function App() {
   return (
     <div className="App">
-      <Header headerNavs={headerNavs} avatarMenus={avatarMenus} user={user} />
+      <Global>
+        <Header headerNavs={headerNavs} avatarMenus={avatarMenus} user={user} />
+      </Global>
     </div>
   );
 }
