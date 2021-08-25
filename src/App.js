@@ -1,6 +1,14 @@
 import React from "react";
 
-import { Header, Global } from "vyaguta-ui-lib";
+import { Header, Global, SecondaryNav, NavLink } from "vyaguta-ui-lib";
+import {
+  Router as BrowserRouter,
+  Redirect,
+  Switch,
+  Route,
+} from "react-router-dom";
+
+import { createBrowserHistory } from "history";
 
 const headerNavs = [
   {
@@ -41,6 +49,35 @@ const avatarMenus = [
   },
 ];
 
+const navItems = [
+  {
+    label: "KPI",
+    to: "/",
+    hasNotification: false,
+  },
+  {
+    label: "Goals & Achievements",
+    to: "/g",
+    hasNotification: false,
+  },
+  {
+    label: "Check-ins",
+    to: "/a",
+    hasNotification: false,
+  },
+  {
+    label: "Feedback",
+    to: "/s",
+    hasNotification: false,
+    isActive: true,
+  },
+  {
+    label: "Evaluation",
+    to: "/d",
+    hasNotification: false,
+  },
+];
+
 const user = {
   name: "Nihal Maskey",
   image:
@@ -50,9 +87,20 @@ const user = {
 function App() {
   return (
     <div className="App">
-      <Global>
-        <Header headerNavs={headerNavs} avatarMenus={avatarMenus} user={user} />
-      </Global>
+      <BrowserRouter
+        history={createBrowserHistory({ basename: "localhost:3000" })}
+      >
+        <Switch>
+          <Global>
+            <Header
+              headerNavs={headerNavs}
+              avatarMenus={avatarMenus}
+              user={user}
+            />
+            <SecondaryNav navItems={navItems} />
+          </Global>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
