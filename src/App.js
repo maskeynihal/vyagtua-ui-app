@@ -1,12 +1,22 @@
 import React from "react";
 
-import { Header, Global, SecondaryNav, NavLink } from "vyaguta-ui-lib";
+import {
+  Header,
+  Global,
+  SecondaryNav,
+  NavLink,
+  Link,
+  Tab,
+  SecondaryNavItem,
+} from "vyaguta-ui-lib";
 import {
   Router as BrowserRouter,
   Redirect,
   Switch,
   Route,
 } from "react-router-dom";
+
+import { FiFileText, FiYoutube } from "vyaguta-icons/fi";
 
 import { createBrowserHistory } from "history";
 
@@ -69,7 +79,6 @@ const navItems = [
     label: "Feedback",
     to: "/s",
     hasNotification: false,
-    isActive: true,
   },
   {
     label: "Evaluation",
@@ -87,20 +96,31 @@ const user = {
 function App() {
   return (
     <div className="App">
-      <BrowserRouter
-        history={createBrowserHistory({ basename: "localhost:3000" })}
-      >
-        <Switch>
-          <Global>
-            <Header
-              headerNavs={headerNavs}
-              avatarMenus={avatarMenus}
-              user={user}
-            />
-            <SecondaryNav navItems={navItems} />
-          </Global>
-        </Switch>
-      </BrowserRouter>
+      <Global>
+        <BrowserRouter
+          history={createBrowserHistory({ basename: "localhost:3000" })}
+        >
+          <Header
+            headerNavs={headerNavs}
+            avatarMenus={avatarMenus}
+            user={user}
+          />
+          <Switch>
+            <SecondaryNav navItems={navItems}>
+              <Link
+                href="http://google.com"
+                size="small"
+                icon={(props) => <FiYoutube {...props} />}
+                iconPosition="left"
+                iconProps={{ size: "28px" }}
+                weight="medium"
+              >
+                JUMP Walkthrough
+              </Link>
+            </SecondaryNav>
+          </Switch>
+        </BrowserRouter>
+      </Global>
     </div>
   );
 }
